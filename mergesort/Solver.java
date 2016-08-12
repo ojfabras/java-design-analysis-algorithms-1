@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * Created by ojfab on 8/9/2016.
+ * Class that reads and solves a file with the parameters for the array to
+ * sort in ascending order using mergesort.
  */
 public class Solver
 {

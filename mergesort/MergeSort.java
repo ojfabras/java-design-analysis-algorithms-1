@@ -43,9 +43,9 @@ public class MergeSort
     //-------------------------------------------------------------------------
 
     /**
-     *
-     * @param a
-     * @param n
+     * Sorts the given array of size n.
+     * @param a Array of int numbers.
+     * @param n Number of elements in the array.
      */
     private static void sort(int[] a, int n)
     {
@@ -59,11 +59,11 @@ public class MergeSort
     }
 
     /**
-     *
-     * @param a
-     * @param lb
-     * @param ub
-     * @return
+     * Obtains a sub-array from array a between indices [lb...ub-1]
+     * @param a Array of int numbers.
+     * @param lb Lower bound index.
+     * @param ub Upper bound index.
+     * @return Sub-array of a within indices [lb...ub-1]
      */
     private static int[] subArray(int[] a, int lb, int ub)
     {
@@ -76,11 +76,12 @@ public class MergeSort
     }
 
     /**
-     *  @param a
-     * @param b
-     * @param c
-     * @param m
-     * @param n
+     * Merges the two sorted arrays b and c into a.
+     *  @param a Array of int numbers of size n.
+     * @param b Array of int numbers of size m.
+     * @param c Array of int numbers of size n - m.
+     * @param m Middle index of a, or size of array b.
+     * @param n Size of array a, or sum of sizes of b and c.
      */
     private static void merge(int[] a, int[] b, int[] c, int m, int n)
     {
@@ -109,5 +110,4 @@ public class MergeSort
             }
         }
     }
-
 }
