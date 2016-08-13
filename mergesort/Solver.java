@@ -8,6 +8,10 @@ import java.util.Vector;
 /**
  * Class that reads and solves a file with the parameters for the array to
  * sort in ascending order using mergesort.
+ *
+ * @author <a href="mailto:ojfabras@gmail.com">Oscar Fabra</a>
+ * @version 1.0
+ * @since 09/08/16
  */
 public class Solver
 {
