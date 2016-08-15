@@ -52,7 +52,7 @@ public class MergeSort
     /**
      * Sorts the given array of size n.
      * @param a Array of int numbers.
-     * @param n Number of elements in the array.
+     * @param n Number of elements in the array a.
      */
     private static void sort(int[] a, int n)
     {
@@ -84,7 +84,7 @@ public class MergeSort
 
     /**
      * Merges the two sorted arrays b and c into a.
-     *  @param a Array of int numbers of size n.
+     * @param a Array of int numbers of size n.
      * @param b Array of int numbers of size m.
      * @param c Array of int numbers of size n - m.
      * @param m Middle index of a, or size of array b.
