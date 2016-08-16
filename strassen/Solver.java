@@ -74,7 +74,7 @@ public class Solver
         readSquareMatrix(y, n, n, lines);
 
         // Multiplies the two square matrices using Strassen's algorithm
-        SquareMatrix z = SquareMatrix.strassensAlgorithm(x, y);
+        SquareMatrix z = SquareMatrix.strassensMultiplication(x, y);
 
         // Prints the product in standard output
         System.out.println(z.toString());
