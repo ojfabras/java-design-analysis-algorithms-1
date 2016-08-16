@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * Class that reads and solves a file with the parameters for the two matrices
- * to multiply using Strassen's algorithm.
+ * Class that reads and solves a file with two square matrices using Strassen's
+ * Sub-cubic Matrix Multiplication Algorithm.
  *
  * @author <a href="mailto:ojfabras@gmail.com">Oscar Fabra</a>
  * @version 1.0
@@ -62,8 +62,44 @@ public class Solver
      */
     private static void solve(List<String> lines)
     {
-        // TODO: Multiply matrices using Strassen's Algorithm
+        // Gets the size of the square matrices
+        int n = Integer.parseInt(lines.remove(0));
 
+        // Reads the first matrix
+        SquareMatrix x = new SquareMatrix(n);
+        readSquareMatrix(x, 0, n, lines);
+
+        // Reads the second matrix
+        SquareMatrix y = new SquareMatrix(n);
+        readSquareMatrix(y, n, n, lines);
+
+        // Multiplies the two square matrices using Strassen's algorithm
+        SquareMatrix z = SquareMatrix.strassensAlgorithm(x, y);
+
+        // Prints the product in standard output
+        System.out.println(z.toString());
+    }
+
+    /**
+     * Reads the corresponding list of lines and stores them in the given
+     * SquareMatrix.
+     * @param m SquareMatrix object to put the values into.
+     * @param lb Initial row of lines to read.
+     * @param n Size of the side of the SquareMatrix.
+     * @param lines Input list with the variables of the problem.
+     */
+    private static void readSquareMatrix(SquareMatrix m, int lb, int n,
+                                         List<String> lines)
+    {
+        for (int i = lb; i < lb + n; i++)
+        {
+            String line = lines.get(i);
+            String [] row = line.split("\\s+");
+            for (int j = 0; j < n; j++)
+            {
+                m.set(i - lb, j, Integer.parseInt(row[j]));
+            }
+        }
     }
 
     //-------------------------------------------------------------------------
