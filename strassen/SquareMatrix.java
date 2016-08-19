@@ -40,10 +40,10 @@ public class SquareMatrix
     //-------------------------------------------------------------------------
 
     /**
-     *
-     * @param row
-     * @param col
-     * @param value
+     * Sets the integer value of this SquareMatrix at (row,col).
+     * @param row Row position, row in [0,1,...,n-1]
+     * @param col Column position, col in [0,1,...,n-1]
+     * @param value Value to set at (row,col).
      */
     public void set(int row, int col, int value)
     {
@@ -51,14 +51,33 @@ public class SquareMatrix
     }
 
     /**
-     *
-     * @param row
-     * @param col
-     * @return
+     * Gets the value at (row,col) of this SquareMatrix.
+     * @param row Row position, row in [0,1,...,n-1]
+     * @param col Column position, col in [0,1,...,n-1]
+     * @return Value of this SquareMatrix at (row,col).
      */
     public int get(int row, int col)
     {
         return this.table[row][col];
+    }
+
+    /**
+     * Returns a String with the corresponding values of this SquareMatrix.
+     * @return A String with the values of this SquareMatrix to show in
+     * standard output.
+     */
+    public String toString()
+    {
+        StringBuilder buffer = new StringBuilder();
+        for(int i = 0; i < n; i++)
+        {
+            for(int j = 0; j < n; j++)
+            {
+                buffer.append(this.table[i][j] + " ");
+            }
+            buffer.append('\n');
+        }
+        return buffer.toString();
     }
 
     //-------------------------------------------------------------------------
@@ -66,13 +85,30 @@ public class SquareMatrix
     //-------------------------------------------------------------------------
 
     /**
-     *
-     * @param x
-     * @param subSquareMatrix
+     * Puts the values of the given SquareMatrix in the corresponding place of
+     * this SquareMatrix.
+     * @param a SquareMatrix whose values are going to be copied
+     * @param subSquareMatrix Where to put the values? (see class constants)
      */
-    private void putSubSquareMatrix(SquareMatrix x, int subSquareMatrix)
+    private void putSubSquareMatrix(SquareMatrix a, int subSquareMatrix)
     {
-        // TODO: putSubSquareMatrix
+        int row = 0;
+        int col = 0;
+        switch (subSquareMatrix)
+        {
+            case UPPER_LEFT_CORNER: row = 0; col = 0; break;
+            case UPPER_RIGHT_CORNER: row = 0; col = a.n; break;
+            case LOWER_LEFT_CORNER: row = a.n; col = 0; break;
+            case LOWER_RIGHT_CORNER: row = a.n; col = a.n; break;
+        }
+        // Fills the sub-square matrix with the corresponding values of a
+        for (int i = row; i < row + a.n; i++)
+        {
+            for (int j = col; j < col + a.n; j++)
+            {
+                this.table[i][j] = a.get(i - row, j - col);
+            }
+        }
     }
 
     //-------------------------------------------------------------------------
@@ -80,10 +116,11 @@ public class SquareMatrix
     //-------------------------------------------------------------------------
 
     /**
-     *
-     * @param x
-     * @param y
-     * @return
+     * Multiplies two given square matrices using Strassen's Sub-cubic
+     * Multiplication Algorithm.
+     * @param x First SquareMatrix.
+     * @param y Second SquareMatrix.
+     * @return The SquareMatrix product of x and y.
      */
     public static SquareMatrix strassensMultiplication(SquareMatrix x,
                                                        SquareMatrix y)
@@ -96,11 +133,12 @@ public class SquareMatrix
     //-------------------------------------------------------------------------
 
     /**
-     *
-     * @param x
-     * @param y
-     * @param n
-     * @return
+     * Recursively multiplies two given square matrices using Strassen's
+     * Sub-cubic Multiplication Algorithm.
+     * @param x First SquareMatrix.
+     * @param y Second SquareMatrix.
+     * @param n Size of a side of the SquareMatrices.
+     * @return The SquareMatrix product of x and y.
      */
     private static SquareMatrix strassensMultiplication(SquareMatrix x,
                                                         SquareMatrix y, int n)
@@ -136,10 +174,10 @@ public class SquareMatrix
     }
 
     /**
-     *
-     * @param x
-     * @param subSquareMatrix
-     * @return
+     * Returns a SquareMatrix from the given SquareMatrix.
+     * @param x The SquareMatrix to take the sub-square matrix from
+     * @param subSquareMatrix Which square Matrix? (see class constants)
+     * @return The corresponding SquareMatrix.
      */
     private static SquareMatrix getSubSquareMatrix(SquareMatrix x, int subSquareMatrix)
     {
@@ -166,10 +204,10 @@ public class SquareMatrix
     }
 
     /**
-     *
-     * @param x
-     * @param y
-     * @return
+     * Adds the two given SquareMatrices.
+     * @param x First SquareMatrix.
+     * @param y Second SquareMatrix.
+     * @return The resulting SquareMatrix.
      */
     private static SquareMatrix add(SquareMatrix x, SquareMatrix y)
     {
@@ -185,10 +223,10 @@ public class SquareMatrix
     }
 
     /**
-     *
-     * @param x
-     * @param y
-     * @return
+     * Subtracts the second SquareMatrix from the first SquareMatrix.
+     * @param x First SquareMatrix.
+     * @param y Second SquareMatrix.
+     * @return The resulting SquareMatrix.
      */
     private static SquareMatrix subtract(SquareMatrix x, SquareMatrix y)
     {
@@ -204,16 +242,16 @@ public class SquareMatrix
     }
 
     /**
-     *
-     * @param p1
-     * @param p2
-     * @param p3
-     * @param p4
-     * @param p5
-     * @param p6
-     * @param p7
-     * @param n
-     * @return
+     * Computes the 7 corresponding products according to Strassen's Algorithm.
+     * @param p1 SquareMatrix resulting from the first product.
+     * @param p2 SquareMatrix resulting from the first product.
+     * @param p3 SquareMatrix resulting from the first product.
+     * @param p4 SquareMatrix resulting from the first product.
+     * @param p5 SquareMatrix resulting from the first product.
+     * @param p6 SquareMatrix resulting from the first product.
+     * @param p7 SquareMatrix resulting from the first product.
+     * @param n Size of a side of the resulting SquareMatrix.
+     * @return The adequate product of matrices x and y.
      */
     private static SquareMatrix computeProducts(SquareMatrix p1, SquareMatrix p2,
                                                 SquareMatrix p3, SquareMatrix p4,
