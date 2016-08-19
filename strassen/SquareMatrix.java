@@ -62,6 +62,20 @@ public class SquareMatrix
     }
 
     //-------------------------------------------------------------------------
+    // PRIVATE METHODS
+    //-------------------------------------------------------------------------
+
+    /**
+     *
+     * @param x
+     * @param subSquareMatrix
+     */
+    private void putSubSquareMatrix(SquareMatrix x, int subSquareMatrix)
+    {
+        // TODO: putSubSquareMatrix
+    }
+
+    //-------------------------------------------------------------------------
     // PUBLIC CLASS METHODS
     //-------------------------------------------------------------------------
 
@@ -101,14 +115,14 @@ public class SquareMatrix
             return z;
         }
 
-        SquareMatrix a = subSquareMatrix(x, UPPER_LEFT_CORNER);
-        SquareMatrix b = subSquareMatrix(x, UPPER_RIGHT_CORNER);
-        SquareMatrix c = subSquareMatrix(x, LOWER_LEFT_CORNER);
-        SquareMatrix d = subSquareMatrix(x, LOWER_RIGHT_CORNER);
-        SquareMatrix e = subSquareMatrix(y, UPPER_LEFT_CORNER);
-        SquareMatrix f = subSquareMatrix(y, UPPER_RIGHT_CORNER);
-        SquareMatrix g = subSquareMatrix(y, LOWER_LEFT_CORNER);
-        SquareMatrix h = subSquareMatrix(y, LOWER_RIGHT_CORNER);
+        SquareMatrix a = getSubSquareMatrix(x, UPPER_LEFT_CORNER);
+        SquareMatrix b = getSubSquareMatrix(x, UPPER_RIGHT_CORNER);
+        SquareMatrix c = getSubSquareMatrix(x, LOWER_LEFT_CORNER);
+        SquareMatrix d = getSubSquareMatrix(x, LOWER_RIGHT_CORNER);
+        SquareMatrix e = getSubSquareMatrix(y, UPPER_LEFT_CORNER);
+        SquareMatrix f = getSubSquareMatrix(y, UPPER_RIGHT_CORNER);
+        SquareMatrix g = getSubSquareMatrix(y, LOWER_LEFT_CORNER);
+        SquareMatrix h = getSubSquareMatrix(y, LOWER_RIGHT_CORNER);
 
         SquareMatrix p1 = strassensMultiplication(a, subtract(f,h), n/2);
         SquareMatrix p2 = strassensMultiplication(add(a,b), h, n/2);
@@ -127,10 +141,28 @@ public class SquareMatrix
      * @param subSquareMatrix
      * @return
      */
-    private static SquareMatrix subSquareMatrix(SquareMatrix x, int subSquareMatrix)
+    private static SquareMatrix getSubSquareMatrix(SquareMatrix x, int subSquareMatrix)
     {
-        // TODO: Get subSquareMatrix
-        return null;
+        int row = 0;
+        int col = 0;
+        int r = x.n % 2;
+        switch (subSquareMatrix)
+        {
+            case UPPER_LEFT_CORNER: row = 0; col = 0; break;
+            case UPPER_RIGHT_CORNER: row = 0; col = x.n/2 + r; break;
+            case LOWER_LEFT_CORNER: row = x.n/2 + r; col = 0; break;
+            case LOWER_RIGHT_CORNER: row = x.n/2 + r; col = x.n/2 + r; break;
+        }
+
+        SquareMatrix m = new SquareMatrix(x.n/2 + r);
+        for (int i = row; i < row + x.n/2 + r; i++)
+        {
+            for (int j = col; j < col + x.n/2 + r; j++)
+            {
+                m.set(i - row, j - col, x.get(i, j));
+            }
+        }
+        return m;
     }
 
     /**
@@ -141,8 +173,15 @@ public class SquareMatrix
      */
     private static SquareMatrix add(SquareMatrix x, SquareMatrix y)
     {
-        // TODO: Add matrices
-        return null;
+        SquareMatrix z = new SquareMatrix(x.n);
+        for (int i = 0; i < x.n; i++)
+        {
+            for (int j = 0; j < x.n; j++)
+            {
+                z.set(i, j, x.get(i,j) + y.get(i,j));
+            }
+        }
+        return z;
     }
 
     /**
@@ -153,12 +192,19 @@ public class SquareMatrix
      */
     private static SquareMatrix subtract(SquareMatrix x, SquareMatrix y)
     {
-        // TODO: Subtract matrices
-        return null;
+        SquareMatrix z = new SquareMatrix(x.n);
+        for (int i = 0; i < x.n; i++)
+        {
+            for (int j = 0; j < x.n; j++)
+            {
+                z.set(i, j, x.get(i,j) - y.get(i,j));
+            }
+        }
+        return z;
     }
 
     /**
-     * 
+     *
      * @param p1
      * @param p2
      * @param p3
@@ -174,7 +220,11 @@ public class SquareMatrix
                                                 SquareMatrix p5, SquareMatrix p6,
                                                 SquareMatrix p7, int n)
     {
-        // TODO: Compute products
-        return null;
+        SquareMatrix z = new SquareMatrix(n);
+        z.putSubSquareMatrix(add(subtract(add(p5,p4),p2),p6), UPPER_LEFT_CORNER);
+        z.putSubSquareMatrix(add(p1,p2), UPPER_RIGHT_CORNER);
+        z.putSubSquareMatrix(add(p3,p4), LOWER_LEFT_CORNER);
+        z.putSubSquareMatrix(subtract(subtract(add(p1,p5),p3),p7), LOWER_RIGHT_CORNER);
+        return z;
     }
 }
