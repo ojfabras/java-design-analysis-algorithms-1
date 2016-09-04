@@ -74,8 +74,8 @@ public class Solver
     }
 
     /**
-     *
-     * @param a
+     * Prints the elements of the given array in standard output.
+     * @param a Array of int numbers.
      */
     private static void show(int[] a)
     {
@@ -98,7 +98,14 @@ public class Solver
     public static void main(String [] args)
     {
         List<String> lines = null;
-        lines = Solver.readLines(args);
+        try
+        {
+            lines = Solver.readLines(args);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
         Solver.solve(lines);
     }
 }

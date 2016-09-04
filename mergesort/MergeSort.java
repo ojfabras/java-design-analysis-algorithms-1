@@ -3,7 +3,7 @@
  * {@code MergeSort} Class that sorts an array of numbers using mergesort.
  *
  * @author <a href="mailto:ojfabras@gmail.com">Oscar Fabra</a>
- * @version 1.0
+ * @version 1.1
  * @since 09/08/16
  */
 
