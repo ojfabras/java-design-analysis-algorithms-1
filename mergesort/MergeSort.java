@@ -32,19 +32,6 @@ public class MergeSort
         sort(a, a.length);
     }
 
-    /**
-     * Prints the elements of the given array in standard output.
-     * @param a Array of int numbers.
-     */
-    public static void show(int[] a)
-    {
-        for (int i = 0; i < a.length; i++)
-        {
-            System.out.print(a[i] + " ");
-        }
-        System.out.println();
-    }
-
     //-------------------------------------------------------------------------
     // PRIVATE HELPER METHODS
     //-------------------------------------------------------------------------

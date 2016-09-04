@@ -7,11 +7,11 @@ import java.util.Vector;
 
 /**
  * Class that reads and solves a file with the parameters for the array to
- * sort in ascending order using mergesort.
+ * sort in ascending order using bubble sort.
  *
  * @author <a href="mailto:ojfabras@gmail.com">Oscar Fabra</a>
  * @version 1.0
- * @since 09/08/16
+ * @since 04/09/16
  */
 public class Solver
 {
@@ -25,12 +25,11 @@ public class Solver
      * @return A List of lines with the data for the problem.
      * @throws java.io.FileNotFoundException If the file couldn't be found.
      */
-    private static List<String> readLines(String[] args) throws FileNotFoundException
-    {
+    private static List<String> readLines(String[] args) throws FileNotFoundException {
         List<String> lines = new Vector<String>();
         String filename = null;
 
-        // Get the file name
+        // Gets the file name
         for (String arg : args)
         {
             if (arg.startsWith("-file="))
@@ -52,7 +51,7 @@ public class Solver
             e.printStackTrace();
         }
 
-        // Return the lines read
+        // Returns the lines read
         return lines;
     }
 
@@ -68,16 +67,18 @@ public class Solver
         {
             a[i] = Integer.parseInt(lines.get(i));
         }
-        // Sort the array and show it in standard output using MergeSort
-        MergeSort.sort(a);
+
+        // Sort the array using BubbleSort and show it in standard output
+        BubbleSort.sort(a);
         show(a);
     }
 
     /**
-     * Prints the elements of the given array in standard output.
-     * @param a Array of int numbers.
+     *
+     * @param a
      */
-    private static void show(int[] a) {
+    private static void show(int[] a)
+    {
         for (int i = 0; i < a.length; i++)
         {
             System.out.print(a[i] + " ");
@@ -96,15 +97,8 @@ public class Solver
      */
     public static void main(String [] args)
     {
-        try
-        {
-            List<String> lines = null;
-            lines = Solver.readLines(args); // Reads the lines from the file
-            Solver.solve(lines);
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
+        List<String> lines = null;
+        lines = Solver.readLines(args);
+        Solver.solve(lines);
     }
 }
